@@ -1,0 +1,603 @@
+/* Easy Calendar - Styles */
+
+/* -------------------------------------------- */
+/*  Main Calendar Panel                         */
+/* -------------------------------------------- */
+
+.easy-calendar {
+  --ec-primary: #7a4fa1;
+  --ec-primary-hover: #9a6fc1;
+  --ec-bg: #1a1a1a;
+  --ec-bg-light: #2a2a2a;
+  --ec-text: #e0e0e0;
+  --ec-text-muted: #888;
+  --ec-border: #444;
+  --ec-today-bg: #7a4fa1;
+  --ec-today-text: #fff;
+}
+
+.easy-calendar-view {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  font-size: 12px;
+}
+
+/* Current Date/Time Display */
+.easy-calendar-view .calendar-current {
+  text-align: center;
+  padding: 8px;
+  background: var(--ec-bg-light);
+  border-radius: 4px;
+}
+
+.easy-calendar-view .calendar-current .weekday-name {
+  display: block;
+  font-size: 11px;
+  color: var(--ec-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.easy-calendar-view .calendar-current .date-string {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--ec-text);
+  margin: 4px 0;
+}
+
+.easy-calendar-view .calendar-current .calendar-time {
+  font-family: monospace;
+  font-size: 18px;
+  color: var(--ec-primary);
+}
+
+/* Season Display */
+.easy-calendar-view .calendar-season {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  font-size: 11px;
+}
+
+.easy-calendar-view .calendar-season .season-icon {
+  font-size: 14px;
+}
+
+.easy-calendar-view .calendar-season .season-name {
+  font-weight: bold;
+}
+
+/* Moon Display */
+.easy-calendar-view .calendar-moons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.easy-calendar-view .moon-phase {
+  font-size: 16px;
+  cursor: help;
+  transition: transform 0.2s;
+}
+
+.easy-calendar-view .moon-phase:hover {
+  transform: scale(1.2);
+}
+
+/* Month Navigation */
+.easy-calendar-view .calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.easy-calendar-view .calendar-nav .nav-btn {
+  background: none;
+  border: none;
+  color: var(--ec-text);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+
+.easy-calendar-view .calendar-nav .nav-btn:hover {
+  background: var(--ec-bg-light);
+  color: var(--ec-primary);
+}
+
+.easy-calendar-view .calendar-nav .nav-title {
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+/* Weekday Headers */
+.easy-calendar-view .calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  text-align: center;
+  font-size: 10px;
+  color: var(--ec-text-muted);
+  text-transform: uppercase;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--ec-border);
+}
+
+.easy-calendar-view .weekday-header {
+  padding: 2px;
+}
+
+/* Calendar Grid */
+.easy-calendar-view .calendar-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.easy-calendar-view .calendar-week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.easy-calendar-view .calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  border-radius: 3px;
+  background: var(--ec-bg-light);
+}
+
+.easy-calendar-view .calendar-day.empty {
+  background: transparent;
+  cursor: default;
+}
+
+.easy-calendar-view .calendar-day.today {
+  background: var(--ec-today-bg);
+  color: var(--ec-today-text);
+  font-weight: bold;
+  box-shadow: 0 0 0 2px var(--ec-primary-hover);
+}
+
+/* Controls */
+.easy-calendar-view .calendar-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px solid var(--ec-border);
+}
+
+.easy-calendar-view .control-btn {
+  background: var(--ec-bg-light);
+  border: 1px solid var(--ec-border);
+  color: var(--ec-text);
+  cursor: pointer;
+  padding: 5px 7px;
+  border-radius: 3px;
+  transition: all 0.2s;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.easy-calendar-view .control-btn:hover {
+  background: var(--ec-primary);
+  border-color: var(--ec-primary);
+  color: var(--ec-today-text);
+}
+
+.easy-calendar-view .control-btn.active {
+  background: var(--ec-primary);
+  border-color: var(--ec-primary);
+  color: var(--ec-today-text);
+}
+
+.easy-calendar-view .gm-controls {
+  display: flex;
+  gap: 4px;
+}
+
+/* Time Advance Controls */
+.easy-calendar-view .time-advance-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.easy-calendar-view .time-unit-row {
+  display: flex;
+  justify-content: center;
+}
+
+.easy-calendar-view .time-unit-select {
+  padding: 4px 8px;
+  background: var(--ec-bg-light);
+  border: 1px solid var(--ec-border);
+  border-radius: 3px;
+  color: var(--ec-text);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.easy-calendar-view .time-buttons-row {
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+.easy-calendar-view .time-buttons-row .control-btn {
+  padding: 4px 6px;
+  font-size: 10px;
+  min-width: 28px;
+}
+
+/* -------------------------------------------- */
+/*  Display Modes                               */
+/* -------------------------------------------- */
+
+/* Compact: hide grid, nav, weekdays, controls - keep date/time/season/moons */
+.easy-calendar.mode-compact .calendar-nav,
+.easy-calendar.mode-compact .calendar-weekdays,
+.easy-calendar.mode-compact .calendar-grid,
+.easy-calendar.mode-compact .calendar-controls {
+  display: none;
+}
+
+/* -------------------------------------------- */
+/*  Configuration Dialog                        */
+/* -------------------------------------------- */
+
+/* Override Foundry v13 transparency */
+.application.easy-calendar-config {
+  background: #1a1a1a !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.application.easy-calendar-config::before,
+.application.easy-calendar-config::after {
+  display: none !important;
+  content: none !important;
+}
+
+.application.easy-calendar-config .window-header {
+  background: #252525 !important;
+}
+
+.application.easy-calendar-config .window-content,
+.easy-calendar-config-content {
+  background: #1a1a1a !important;
+  padding: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Target the specific app element structure */
+#easy-calendar-config {
+  background: #1a1a1a !important;
+  backdrop-filter: none !important;
+}
+
+#easy-calendar-config .window-content {
+  background: #1a1a1a !important;
+}
+
+.easy-calendar-config-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 12px;
+  overflow-y: auto;
+  background: #1a1a1a !important;
+  min-height: 100%;
+}
+
+.easy-calendar-config-form .config-section {
+  background: var(--ec-bg-light);
+  border-radius: 4px;
+  padding: 12px;
+}
+
+.easy-calendar-config-form .config-section h3 {
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--ec-border);
+  font-size: 14px;
+  color: var(--ec-primary);
+}
+
+.easy-calendar-config-form .config-section h3 i {
+  margin-right: 8px;
+}
+
+.easy-calendar-config-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.easy-calendar-config-form .form-group:last-child {
+  margin-bottom: 0;
+}
+
+.easy-calendar-config-form .form-group label {
+  font-weight: bold;
+  font-size: 12px;
+  color: var(--ec-text);
+}
+
+.easy-calendar-config-form .form-group input[type="text"],
+.easy-calendar-config-form .form-group input[type="number"],
+.easy-calendar-config-form .form-group select {
+  padding: 6px 8px;
+  background: var(--ec-bg);
+  border: 1px solid var(--ec-border);
+  border-radius: 3px;
+  color: var(--ec-text);
+  font-size: 12px;
+}
+
+.easy-calendar-config-form .form-group input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+}
+
+.easy-calendar-config-form .form-group .hint {
+  font-size: 10px;
+  color: var(--ec-text-muted);
+  margin: 4px 0 0 0;
+}
+
+.easy-calendar-config-form .form-fields {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.easy-calendar-config-form .form-fields select {
+  flex: 1;
+}
+
+/* Month, Weekday, Season, and Moon Lists */
+.easy-calendar-config-form .month-list,
+.easy-calendar-config-form .weekday-list,
+.easy-calendar-config-form .season-list,
+.easy-calendar-config-form .moon-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.easy-calendar-config-form .month-row,
+.easy-calendar-config-form .weekday-row,
+.easy-calendar-config-form .season-row,
+.easy-calendar-config-form .moon-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  background: var(--ec-bg);
+  border-radius: 3px;
+}
+
+.easy-calendar-config-form .month-row input,
+.easy-calendar-config-form .weekday-row input {
+  flex: 1;
+  padding: 4px 6px;
+  background: var(--ec-bg-light);
+  border: 1px solid var(--ec-border);
+  border-radius: 3px;
+  color: var(--ec-text);
+  font-size: 11px;
+}
+
+.easy-calendar-config-form .month-row input.short,
+.easy-calendar-config-form .weekday-row input.short {
+  flex: 0 0 60px;
+  text-align: center;
+}
+
+.easy-calendar-config-form .row-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.easy-calendar-config-form .icon-btn {
+  background: var(--ec-bg-light);
+  border: 1px solid var(--ec-border);
+  color: var(--ec-text-muted);
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  transition: all 0.2s;
+}
+
+.easy-calendar-config-form .icon-btn:hover {
+  background: var(--ec-primary);
+  border-color: var(--ec-primary);
+  color: var(--ec-today-text);
+}
+
+.easy-calendar-config-form .icon-btn.danger:hover {
+  background: #a14f4f;
+  border-color: #a14f4f;
+}
+
+/* Leap Year Months */
+.easy-calendar-config-form .leap-month-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 8px;
+  background: var(--ec-bg);
+  border-radius: 3px;
+}
+
+.easy-calendar-config-form .leap-month-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.easy-calendar-config-form .leap-month-row input[type="checkbox"] {
+  margin: 0;
+}
+
+.easy-calendar-config-form .leap-month-row span {
+  flex: 1;
+}
+
+.easy-calendar-config-form .leap-month-row input[type="number"] {
+  width: 50px;
+  padding: 2px 4px;
+  background: var(--ec-bg-light);
+  border: 1px solid var(--ec-border);
+  border-radius: 3px;
+  color: var(--ec-text);
+  font-size: 11px;
+  text-align: center;
+}
+
+/* Season Rows */
+.easy-calendar-config-form .season-row input[type="text"],
+.easy-calendar-config-form .moon-row input[type="text"] {
+  flex: 1;
+  padding: 4px 6px;
+  background: var(--ec-bg-light);
+  border: 1px solid var(--ec-border);
+  border-radius: 3px;
+  color: var(--ec-text);
+  font-size: 11px;
+}
+
+.easy-calendar-config-form .season-row input[type="number"],
+.easy-calendar-config-form .moon-row input[type="number"] {
+  width: 60px;
+  padding: 4px 6px;
+  background: var(--ec-bg-light);
+  border: 1px solid var(--ec-border);
+  border-radius: 3px;
+  color: var(--ec-text);
+  font-size: 11px;
+  text-align: center;
+}
+
+.easy-calendar-config-form .color-input {
+  width: 32px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid var(--ec-border);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.easy-calendar-config-form .icon-select {
+  padding: 4px 6px;
+  background: var(--ec-bg-light);
+  border: 1px solid var(--ec-border);
+  border-radius: 3px;
+  color: var(--ec-text);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+/* Season Details (start date) */
+.easy-calendar-config-form .season-details {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px 6px 40px;
+  background: var(--ec-bg);
+  border-radius: 0 0 3px 3px;
+  margin-top: -6px;
+  font-size: 11px;
+}
+
+.easy-calendar-config-form .season-details label {
+  color: var(--ec-text-muted);
+  font-size: 10px;
+}
+
+.easy-calendar-config-form .season-details select,
+.easy-calendar-config-form .season-details input {
+  padding: 3px 5px;
+  background: var(--ec-bg-light);
+  border: 1px solid var(--ec-border);
+  border-radius: 3px;
+  color: var(--ec-text);
+  font-size: 10px;
+}
+
+/* Buttons */
+.easy-calendar-config-form .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--ec-bg);
+  border: 1px solid var(--ec-border);
+  border-radius: 4px;
+  color: var(--ec-text);
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.easy-calendar-config-form .btn:hover {
+  background: var(--ec-bg-light);
+  border-color: var(--ec-primary);
+}
+
+.easy-calendar-config-form .btn.primary {
+  background: var(--ec-primary);
+  border-color: var(--ec-primary);
+  color: var(--ec-today-text);
+}
+
+.easy-calendar-config-form .btn.primary:hover {
+  background: var(--ec-primary-hover);
+  border-color: var(--ec-primary-hover);
+}
+
+.easy-calendar-config-form .button-row {
+  display: flex;
+  gap: 8px;
+}
+
+/* Footer */
+.easy-calendar-config-form .config-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ec-border);
+  margin-top: auto;
+}

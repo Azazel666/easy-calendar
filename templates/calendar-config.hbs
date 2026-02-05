@@ -1,0 +1,256 @@
+<form class="easy-calendar-config-form">
+  {{!-- Preset Section --}}
+  <section class="config-section">
+    <h3><i class="fas fa-magic"></i> Presets</h3>
+    <div class="form-group">
+      <label>Load Preset</label>
+      <div class="form-fields">
+        <select name="preset">
+          <option value="">-- Select Preset --</option>
+          {{#each presets}}
+          <option value="{{@key}}">{{this}}</option>
+          {{/each}}
+        </select>
+        <button type="button" class="btn" data-action="load-preset">
+          <i class="fas fa-download"></i> Load
+        </button>
+      </div>
+    </div>
+  </section>
+
+  {{!-- Basic Info --}}
+  <section class="config-section">
+    <h3><i class="fas fa-info-circle"></i> Basic Information</h3>
+    <div class="form-group">
+      <label>Calendar Name</label>
+      <input type="text" name="name" value="{{config.name}}" placeholder="My Calendar" />
+    </div>
+    <div class="form-group">
+      <label>Name Prefix</label>
+      <input type="text" name="namePrefix" value="{{config.namePrefix}}" placeholder="e.g., Year of the " />
+    </div>
+    <div class="form-group">
+      <label>Name Suffix</label>
+      <input type="text" name="nameSuffix" value="{{config.nameSuffix}}" placeholder="e.g., - Common Reckoning" />
+    </div>
+  </section>
+
+  {{!-- Year Configuration --}}
+  <section class="config-section">
+    <h3><i class="fas fa-calendar-day"></i> Year Display</h3>
+    <div class="form-group">
+      <label>Year Prefix</label>
+      <input type="text" name="yearConfig.yearPrefix" value="{{config.yearConfig.yearPrefix}}" placeholder="e.g., DR " />
+    </div>
+    <div class="form-group">
+      <label>Year Suffix</label>
+      <input type="text" name="yearConfig.yearSuffix" value="{{config.yearConfig.yearSuffix}}" placeholder="e.g., CE" />
+    </div>
+  </section>
+
+  {{!-- Time Configuration --}}
+  <section class="config-section">
+    <h3><i class="fas fa-clock"></i> Time Settings</h3>
+    <div class="form-group">
+      <label>Hours per Day</label>
+      <input type="number" name="time.hoursPerDay" value="{{config.time.hoursPerDay}}" min="1" max="100" />
+    </div>
+    <div class="form-group">
+      <label>Minutes per Hour</label>
+      <input type="number" name="time.minutesPerHour" value="{{config.time.minutesPerHour}}" min="1" max="100" />
+    </div>
+    <div class="form-group">
+      <label>Seconds per Minute</label>
+      <input type="number" name="time.secondsPerMinute" value="{{config.time.secondsPerMinute}}" min="1" max="100" />
+    </div>
+  </section>
+
+  {{!-- Weekdays --}}
+  <section class="config-section">
+    <h3><i class="fas fa-calendar-week"></i> Weekdays</h3>
+    <div class="weekday-list">
+      {{#each config.weekdays}}
+      <div class="weekday-row" data-weekday-id="{{this.id}}">
+        <div class="row-controls">
+          <button type="button" class="icon-btn" data-action="move-weekday-up" title="Move Up">
+            <i class="fas fa-arrow-up"></i>
+          </button>
+          <button type="button" class="icon-btn" data-action="move-weekday-down" title="Move Down">
+            <i class="fas fa-arrow-down"></i>
+          </button>
+        </div>
+        <input type="text" name="weekday-name" value="{{this.name}}" placeholder="Name" />
+        <input type="text" name="weekday-abbr" value="{{this.abbreviation}}" placeholder="Abbr" class="short" />
+        <button type="button" class="icon-btn danger" data-action="remove-weekday" title="Remove">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+      {{/each}}
+    </div>
+    <button type="button" class="btn" data-action="add-weekday">
+      <i class="fas fa-plus"></i> Add Weekday
+    </button>
+    <div class="form-group">
+      <label>First Day of Week</label>
+      <select name="firstWeekday">
+        {{#each config.weekdays}}
+        <option value="{{@index}}" {{#if (eq @index ../config.firstWeekday)}}selected{{/if}}>{{this.name}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </section>
+
+  {{!-- Months --}}
+  <section class="config-section">
+    <h3><i class="fas fa-calendar"></i> Months</h3>
+    <div class="month-list">
+      {{#each config.months}}
+      <div class="month-row" data-month-id="{{this.id}}">
+        <div class="row-controls">
+          <button type="button" class="icon-btn" data-action="move-month-up" title="Move Up">
+            <i class="fas fa-arrow-up"></i>
+          </button>
+          <button type="button" class="icon-btn" data-action="move-month-down" title="Move Down">
+            <i class="fas fa-arrow-down"></i>
+          </button>
+        </div>
+        <input type="text" name="month-name" value="{{this.name}}" placeholder="Name" />
+        <input type="text" name="month-abbr" value="{{this.abbreviation}}" placeholder="Abbr" class="short" />
+        <input type="number" name="month-days" value="{{this.days}}" min="1" max="100" class="short" title="Days" />
+        <button type="button" class="icon-btn danger" data-action="remove-month" title="Remove">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+      {{/each}}
+    </div>
+    <button type="button" class="btn" data-action="add-month">
+      <i class="fas fa-plus"></i> Add Month
+    </button>
+  </section>
+
+  {{!-- Leap Year --}}
+  <section class="config-section">
+    <h3><i class="fas fa-calendar-plus"></i> Leap Year</h3>
+    <div class="form-group">
+      <label>Enable Leap Years</label>
+      <input type="checkbox" name="leapYear.enabled" {{#if config.leapYear.enabled}}checked{{/if}} />
+    </div>
+    <div class="form-group">
+      <label>Leap Year Rule</label>
+      <select name="leapYear.rule">
+        {{#each leapYearRules}}
+        <option value="{{@key}}" {{#if (eq @key ../config.leapYear.rule)}}selected{{/if}}>{{this}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Simple Interval</label>
+      <input type="number" name="leapYear.interval" value="{{config.leapYear.interval}}" min="1" />
+      <p class="hint">For simple rule: leap year every N years</p>
+    </div>
+    <div class="form-group">
+      <label>Leap Year Months</label>
+      <p class="hint">Select months that gain extra days during leap years:</p>
+      <div class="leap-month-list">
+        {{#each config.months}}
+        <div class="leap-month-row">
+          <input type="checkbox" class="leap-month-checkbox" data-month-id="{{this.id}}"
+            {{#each ../config.leapYear.months}}
+              {{#if (eq this.monthId ../this.id)}}checked{{/if}}
+            {{/each}}
+          />
+          <span>{{this.name}}</span>
+          <input type="number" name="leap-extra-days" value="1" min="1" max="10" class="short" title="Extra Days" />
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+
+  {{!-- Seasons --}}
+  <section class="config-section">
+    <h3><i class="fas fa-sun"></i> Seasons</h3>
+    <div class="season-list">
+      {{#each config.seasons}}
+      <div class="season-row" data-season-id="{{this.id}}">
+        <div class="row-controls">
+          <button type="button" class="icon-btn" data-action="move-season-up" title="Move Up">
+            <i class="fas fa-arrow-up"></i>
+          </button>
+          <button type="button" class="icon-btn" data-action="move-season-down" title="Move Down">
+            <i class="fas fa-arrow-down"></i>
+          </button>
+        </div>
+        <input type="text" name="season-name" value="{{this.name}}" placeholder="Name" />
+        <input type="color" name="season-color" value="{{this.color}}" class="color-input" title="Color" />
+        <select name="season-icon" class="icon-select">
+          <option value="spring" {{#if (eq this.icon "spring")}}selected{{/if}}>🌸 Spring</option>
+          <option value="summer" {{#if (eq this.icon "summer")}}selected{{/if}}>☀️ Summer</option>
+          <option value="fall" {{#if (eq this.icon "fall")}}selected{{/if}}>🍂 Fall</option>
+          <option value="winter" {{#if (eq this.icon "winter")}}selected{{/if}}>❄️ Winter</option>
+        </select>
+        <button type="button" class="icon-btn danger" data-action="remove-season" title="Remove">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+      <div class="season-details" data-season-id="{{this.id}}">
+        <label>Starts:</label>
+        <select name="season-month">
+          {{#each ../config.months}}
+          <option value="{{@index}}" {{#if (eq @index ../this.startingMonth)}}selected{{/if}}>{{this.name}}</option>
+          {{/each}}
+        </select>
+        <input type="number" name="season-day" value="{{this.startingDay}}" min="1" max="31" class="short" title="Day" />
+      </div>
+      {{/each}}
+    </div>
+    <button type="button" class="btn" data-action="add-season">
+      <i class="fas fa-plus"></i> Add Season
+    </button>
+  </section>
+
+  {{!-- Moons --}}
+  <section class="config-section">
+    <h3><i class="fas fa-moon"></i> Moons</h3>
+    <div class="moon-list">
+      {{#each config.moons}}
+      <div class="moon-row" data-moon-id="{{this.id}}">
+        <input type="text" name="moon-name" value="{{this.name}}" placeholder="Moon Name" />
+        <input type="color" name="moon-color" value="{{this.color}}" class="color-input" title="Color" />
+        <input type="number" name="moon-cycle" value="{{this.cycleLength}}" min="1" max="100" step="0.01" class="short" title="Cycle Length (days)" />
+        <button type="button" class="icon-btn danger" data-action="remove-moon" title="Remove">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+      {{/each}}
+    </div>
+    <button type="button" class="btn" data-action="add-moon">
+      <i class="fas fa-plus"></i> Add Moon
+    </button>
+    <p class="hint">Cycle length is in days. Standard lunar cycle is ~29.53 days.</p>
+  </section>
+
+  {{!-- Import/Export --}}
+  <section class="config-section">
+    <h3><i class="fas fa-file-import"></i> Import / Export</h3>
+    <p class="hint">Supports Easy Calendar and Simple Calendar export formats.</p>
+    <div class="button-row">
+      <button type="button" class="btn" data-action="export">
+        <i class="fas fa-download"></i> Export Calendar
+      </button>
+      <button type="button" class="btn" data-action="import">
+        <i class="fas fa-upload"></i> Import Calendar
+      </button>
+    </div>
+  </section>
+
+  {{!-- Action Buttons --}}
+  <footer class="config-footer">
+    <button type="button" class="btn" data-action="cancel">
+      <i class="fas fa-times"></i> Cancel
+    </button>
+    <button type="button" class="btn primary" data-action="save">
+      <i class="fas fa-save"></i> Save Configuration
+    </button>
+  </footer>
+</form>

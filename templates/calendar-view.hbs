@@ -1,0 +1,137 @@
+<div class="easy-calendar-view">
+  {{!-- Current Date/Time Display --}}
+  <div class="calendar-current">
+    <div class="calendar-date">
+      <span class="weekday-name">{{weekdayName}}</span>
+      <span class="date-string">{{currentDateString}}</span>
+    </div>
+    <div class="calendar-time">{{timeString}}</div>
+
+    {{!-- Season and Moon Display --}}
+    {{#if currentSeason}}
+    <div class="calendar-season" style="color: {{currentSeason.color}}">
+      <span class="season-icon">
+        {{#if (eq currentSeason.icon "spring")}}🌸{{/if}}
+        {{#if (eq currentSeason.icon "summer")}}☀️{{/if}}
+        {{#if (eq currentSeason.icon "fall")}}🍂{{/if}}
+        {{#if (eq currentSeason.icon "winter")}}❄️{{/if}}
+      </span>
+      <span class="season-name">{{currentSeason.name}}</span>
+    </div>
+    {{/if}}
+
+    {{#if moonPhases.length}}
+    <div class="calendar-moons">
+      {{#each moonPhases}}
+      <span class="moon-phase" title="{{this.moonName}}: {{this.phaseName}} ({{this.percentIlluminated}}% illuminated)" style="color: {{this.moonColor}}">
+        {{#if (eq this.icon "new")}}🌑{{/if}}
+        {{#if (eq this.icon "waxing-crescent")}}🌒{{/if}}
+        {{#if (eq this.icon "first-quarter")}}🌓{{/if}}
+        {{#if (eq this.icon "waxing-gibbous")}}🌔{{/if}}
+        {{#if (eq this.icon "full")}}🌕{{/if}}
+        {{#if (eq this.icon "waning-gibbous")}}🌖{{/if}}
+        {{#if (eq this.icon "last-quarter")}}🌗{{/if}}
+        {{#if (eq this.icon "waning-crescent")}}🌘{{/if}}
+      </span>
+      {{/each}}
+    </div>
+    {{/if}}
+  </div>
+
+  {{!-- Month Navigation --}}
+  <div class="calendar-nav">
+    <button type="button" class="nav-btn" data-action="prev-year" title="Previous Year">
+      <i class="fas fa-angle-double-left"></i>
+    </button>
+    <button type="button" class="nav-btn" data-action="prev-month" title="Previous Month">
+      <i class="fas fa-angle-left"></i>
+    </button>
+    <span class="nav-title">{{viewMonthData.name}} {{yearDisplay}}</span>
+    <button type="button" class="nav-btn" data-action="next-month" title="Next Month">
+      <i class="fas fa-angle-right"></i>
+    </button>
+    <button type="button" class="nav-btn" data-action="next-year" title="Next Year">
+      <i class="fas fa-angle-double-right"></i>
+    </button>
+  </div>
+
+  {{!-- Weekday Headers --}}
+  <div class="calendar-weekdays">
+    {{#each orderedWeekdays}}
+    <div class="weekday-header" title="{{this.name}}">{{this.abbreviation}}</div>
+    {{/each}}
+  </div>
+
+  {{!-- Calendar Grid --}}
+  <div class="calendar-grid">
+    {{#each grid}}
+    <div class="calendar-week">
+      {{#each this}}
+      {{#if this.empty}}
+      <div class="calendar-day empty"></div>
+      {{else}}
+      <div class="calendar-day{{#if this.isToday}} today{{/if}}" data-day="{{this.day}}">
+        {{this.day}}
+      </div>
+      {{/if}}
+      {{/each}}
+    </div>
+    {{/each}}
+  </div>
+
+  {{!-- Controls --}}
+  <div class="calendar-controls">
+    <button type="button" class="control-btn" data-action="today" title="Go to Today">
+      <i class="fas fa-home"></i>
+    </button>
+
+    {{#if canAdvance}}
+    <div class="time-advance-controls">
+      <div class="time-unit-row">
+        <select name="time-unit" class="time-unit-select">
+          {{#each timeUnits}}
+          <option value="{{this.value}}" {{#if (eq this.value ../selectedUnit)}}selected{{/if}}>{{this.label}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="time-buttons-row">
+        <button type="button" class="control-btn" data-action="advance-time" data-amount="-10" title="Rewind 10">
+          -10
+        </button>
+        <button type="button" class="control-btn" data-action="advance-time" data-amount="-5" title="Rewind 5">
+          -5
+        </button>
+        <button type="button" class="control-btn" data-action="advance-time" data-amount="-1" title="Rewind 1">
+          -1
+        </button>
+        <button type="button" class="control-btn" data-action="advance-time" data-amount="1" title="Advance 1">
+          +1
+        </button>
+        <button type="button" class="control-btn" data-action="advance-time" data-amount="5" title="Advance 5">
+          +5
+        </button>
+        <button type="button" class="control-btn" data-action="advance-time" data-amount="10" title="Advance 10">
+          +10
+        </button>
+        <button type="button" class="control-btn" data-action="advance-custom" title="Custom Amount">
+          <i class="fas fa-ellipsis-h"></i>
+        </button>
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if isGM}}
+    <div class="gm-controls">
+      <button type="button" class="control-btn{{#if syncEnabled}} active{{/if}}" data-action="toggle-sync" title="{{#if syncEnabled}}Sync Enabled{{else}}Sync Disabled{{/if}}">
+        <i class="fas fa-sync-alt"></i>
+      </button>
+      <button type="button" class="control-btn" data-action="quick-set" title="Set Date/Time">
+        <i class="fas fa-edit"></i>
+      </button>
+      <button type="button" class="control-btn" data-action="open-config" title="Configure Calendar">
+        <i class="fas fa-cog"></i>
+      </button>
+    </div>
+    {{/if}}
+  </div>
+</div>

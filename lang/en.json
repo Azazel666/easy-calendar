@@ -1,0 +1,103 @@
+{
+  "easy-calendar": {
+    "title": "Easy Calendar",
+
+    "settings": {
+      "syncWorldTime": {
+        "name": "Sync with World Time",
+        "hint": "When enabled, calendar changes will update Foundry's world time and vice versa."
+      },
+      "playersCanAdvance": {
+        "name": "Players Can Advance Time",
+        "hint": "Allow players to advance the calendar time."
+      },
+      "configMenu": {
+        "name": "Calendar Configuration",
+        "label": "Open Configuration",
+        "hint": "Configure months, weekdays, and other calendar settings."
+      }
+    },
+
+    "controls": {
+      "toggleCalendar": "Toggle Calendar",
+      "configureCalendar": "Calendar Configuration"
+    },
+
+    "view": {
+      "prevYear": "Previous Year",
+      "prevMonth": "Previous Month",
+      "nextMonth": "Next Month",
+      "nextYear": "Next Year",
+      "today": "Go to Today",
+      "rewindHour": "Rewind 1 Hour",
+      "rewindDay": "Rewind 1 Day",
+      "advanceHour": "Advance 1 Hour",
+      "advanceDay": "Advance 1 Day",
+      "syncEnabled": "Sync Enabled",
+      "syncDisabled": "Sync Disabled",
+      "setDateTime": "Set Date/Time",
+      "configure": "Configure Calendar"
+    },
+
+    "config": {
+      "title": "Calendar Configuration",
+      "presets": "Presets",
+      "loadPreset": "Load Preset",
+      "basicInfo": "Basic Information",
+      "calendarName": "Calendar Name",
+      "namePrefix": "Name Prefix",
+      "nameSuffix": "Name Suffix",
+      "yearSettings": "Year Settings",
+      "startingYear": "Starting Year",
+      "yearZeroExists": "Year Zero Exists",
+      "yearPrefix": "Year Prefix",
+      "yearSuffix": "Year Suffix",
+      "timeSettings": "Time Settings",
+      "hoursPerDay": "Hours per Day",
+      "minutesPerHour": "Minutes per Hour",
+      "secondsPerMinute": "Seconds per Minute",
+      "weekdays": "Weekdays",
+      "addWeekday": "Add Weekday",
+      "firstDayOfWeek": "First Day of Week",
+      "months": "Months",
+      "addMonth": "Add Month",
+      "leapYear": "Leap Year",
+      "enableLeapYears": "Enable Leap Years",
+      "leapYearRule": "Leap Year Rule",
+      "simpleInterval": "Simple Interval",
+      "leapYearMonths": "Leap Year Months",
+      "importExport": "Import / Export",
+      "export": "Export Calendar",
+      "import": "Import Calendar",
+      "cancel": "Cancel",
+      "save": "Save Configuration"
+    },
+
+    "presets": {
+      "gregorian": "Gregorian Calendar"
+    },
+
+    "leapYearRules": {
+      "gregorian": "Gregorian (every 4, except 100, except 400)",
+      "simple": "Simple Interval"
+    },
+
+    "dialogs": {
+      "setDateTime": "Set Date & Time",
+      "exportCalendar": "Export Calendar",
+      "includeStatePrompt": "Include the current date and time in the export?",
+      "importCalendar": "Import Calendar",
+      "importStatePrompt": "This file includes a saved date. Import the date as well?"
+    },
+
+    "notifications": {
+      "exported": "Exported calendar: {filename}",
+      "imported": "Calendar imported. Click Save to apply changes.",
+      "importFailed": "Failed to import calendar: {error}",
+      "saved": "Calendar configuration saved.",
+      "noPermission": "You do not have permission to advance time.",
+      "needMonth": "Calendar must have at least one month.",
+      "needWeekday": "Calendar must have at least one weekday."
+    }
+  }
+}
