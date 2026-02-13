@@ -113,7 +113,14 @@ export class CalendarData {
     if (currentState.lastSyncedWorldTime === worldTime) return;
 
     const config = this.getConfig();
-    const newState = CalendarTime.fromWorldTime(worldTime, config);
+
+    // Calculate the delta between new world time and last synced world time,
+    // then apply that delta to the calendar's own time representation.
+    // We cannot use fromWorldTime(worldTime) directly because Foundry's absolute
+    // worldTime has no relation to the calendar's epoch.
+    const delta = worldTime - (currentState.lastSyncedWorldTime ?? worldTime);
+    const currentCalendarTime = CalendarTime.toWorldTime(currentState, config);
+    const newState = CalendarTime.fromWorldTime(currentCalendarTime + delta, config);
 
     // Preserve sync settings and update last synced time
     newState.syncEnabled = currentState.syncEnabled;

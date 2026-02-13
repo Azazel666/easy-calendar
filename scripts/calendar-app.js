@@ -238,9 +238,6 @@ export class CalendarApp extends HandlebarsApplicationMixin(ApplicationV2) {
     // Custom time input
     el.querySelector('[data-action="advance-custom"]')?.addEventListener('click', () => this._onAdvanceCustom());
 
-    // Config button (GM only)
-    el.querySelector('[data-action="open-config"]')?.addEventListener('click', () => this._onOpenConfig());
-
     // Quick set date (GM only)
     el.querySelector('[data-action="quick-set"]')?.addEventListener('click', () => this._onQuickSetDate());
 
@@ -351,13 +348,6 @@ export class CalendarApp extends HandlebarsApplicationMixin(ApplicationV2) {
     if (result && result !== 'cancel' && result !== 0) {
       await this._onAdvanceTime(result, this._selectedUnit);
     }
-  }
-
-  async _onOpenConfig() {
-    if (!game.user.isGM) return;
-
-    const { CalendarConfigApp } = await import('./calendar-config-app.js');
-    new CalendarConfigApp().render({ force: true });
   }
 
   async _onQuickSetDate() {

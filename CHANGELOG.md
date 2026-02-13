@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.1 - 2026-02-13
+
+### Bug Fixes
+- Fixed calendar date jumping to a wrong date on the first combat round advance when world time sync is enabled. The sync now correctly applies the time delta rather than reinterpreting Foundry's absolute world time against the calendar epoch.
+
 ## v1.0.0 - 2026-02-05
 
 Initial release of Easy Calendar for Foundry VTT v13+.

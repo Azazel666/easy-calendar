@@ -2,7 +2,7 @@
   "id": "easy-calendar",
   "title": "Easy Calendar",
   "description": "A system-agnostic calendar module for Foundry VTT with custom calendar support, draggable UI, optional world time integration, and export/import functionality.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "compatibility": {
     "minimum": "13",
     "verified": "13"
@@ -29,5 +29,5 @@
     "canUpload": true
   },
   "manifest": "https://github.com/Azazel666/easy-calendar/releases/latest/download/module.json",
-  "download": "https://github.com/Azazel666/easy-calendar/releases/download/v1.0.0/easy-calendar.zip"
+  "download": "https://github.com/Azazel666/easy-calendar/releases/download/v1.0.1/easy-calendar.zip"
 }

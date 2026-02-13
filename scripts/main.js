@@ -9,10 +9,45 @@ import { getPreset } from './calendar-presets.js';
 let calendarApp = null;
 
 /* -------------------------------------------- */
+/*  Settings Menu Wrapper                       */
+/* -------------------------------------------- */
+
+// Wrapper class for registerMenu - just opens the real config app
+class CalendarConfigAppWrapper extends FormApplication {
+  constructor(...args) {
+    super(...args);
+    // Immediately open the real config and close this wrapper
+    import('./calendar-config-app.js').then(({ CalendarConfigApp }) => {
+      new CalendarConfigApp().render({ force: true });
+    });
+  }
+
+  async _updateObject() {}
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      id: 'easy-calendar-config-wrapper',
+      template: '',
+      width: 0,
+      height: 0
+    });
+  }
+}
+
+/* -------------------------------------------- */
 /*  Module Settings                             */
 /* -------------------------------------------- */
 
 function registerSettings() {
+  // Settings menu button to open calendar configuration
+  game.settings.registerMenu(MODULE_ID, 'calendarConfigMenu', {
+    name: 'Calendar Configuration',
+    label: 'Configure Calendar',
+    hint: 'Open the calendar configuration dialog to customize months, weekdays, seasons, moons, and more.',
+    icon: 'fas fa-calendar-cog',
+    type: CalendarConfigAppWrapper,
+    restricted: true
+  });
+
   // World settings (GM sets, all see)
   game.settings.register(MODULE_ID, SETTINGS.CALENDAR_CONFIG, {
     name: 'Calendar Configuration',
@@ -181,22 +216,6 @@ Hooks.on('getSceneControlButtons', (controls) => {
       }
     }
   };
-
-  if (game.user.isGM) {
-    controls.tokens.tools.easyCalendarConfig = {
-      name: 'easyCalendarConfig',
-      title: 'Calendar Configuration',
-      icon: 'fa-solid fa-calendar-cog',
-      order: toolCount + 1,
-      button: true,
-      visible: true,
-      onChange: () => {
-        import('./calendar-config-app.js').then(({ CalendarConfigApp }) => {
-          new CalendarConfigApp().render({ force: true });
-        });
-      }
-    };
-  }
 });
 
 /* -------------------------------------------- */
